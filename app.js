@@ -36,6 +36,17 @@ document.getElementById("login").addEventListener("click", async () => {
 
     const assertion = await navigator.credentials.get({ publicKey });
     console.log("Authentication assertion:", assertion);
+
+     // Display some info on screen
+    document.body.insertAdjacentHTML("beforeend", `
+      <pre>${JSON.stringify({
+        id: assertion.id,
+        type: assertion.type,
+        clientDataJSON: new TextDecoder().decode(assertion.response.clientDataJSON),
+        authenticatorData: btoa(String.fromCharCode(...new Uint8Array(assertion.response.authenticatorData)))
+      }, null, 2)}</pre>
+    `);
+    
     alert("Logged in with passkey!");
   } catch (err) {
     console.error(err);
