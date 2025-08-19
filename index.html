@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>PWA Passkey Demo</title>
+  <!-- Standard favicon -->
+  <link rel="icon" href="/icons/favicon-32X32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/icons/favicon-16X16.png" sizes="16x16" type="image/png">
+
+  <!-- Apple devices (iOS home screen icons) -->
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+  <!-- For Windows tiles -->
+  <meta name="msapplication-TileColor" content="#317EFB">
+  <meta name="theme-color" content="#317EFB">
   <link rel="manifest" href="/manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#317EFB" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="apple-mobile-web-app-title" content="Passkey PWA" />
-  <link rel="apple-touch-icon" href="/icons/icon-192.png">
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="/app.js"></script>
 </head>
+
 <body class="bg-gray-50 h-screen flex items-center justify-center p-4">
 
   <!-- Container -->
@@ -24,11 +35,11 @@
 
     <!-- Buttons -->
     <div class="flex flex-col gap-3">
-      <button id="register" 
+      <button id="register"
         class="w-full bg-blue-600 text-white py-3 rounded-xl shadow-md hover:bg-blue-700 active:scale-95 transition">
         Register Passkey
       </button>
-      <button id="login" 
+      <button id="login"
         class="w-full bg-green-600 text-white py-3 rounded-xl shadow-md hover:bg-green-700 active:scale-95 transition">
         Login with Passkey
       </button>
@@ -39,4 +50,5 @@
   </div>
 
 </body>
+
 </html>
