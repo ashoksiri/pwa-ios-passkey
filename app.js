@@ -3,10 +3,16 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
 }
 
+function showOutput(obj) {
+  const out = document.getElementById("output");
+  out.textContent = JSON.stringify(obj, null, 2);
+  out.classList.remove("hidden");
+}
+
 document.getElementById("register").addEventListener("click", async () => {
   try {
     const publicKey = {
-      challenge: new Uint8Array(32), // normally from server
+      challenge: new Uint8Array(32), // Normally from server
       rp: { name: "Passkey PWA Demo" },
       user: {
         id: new Uint8Array(16),
@@ -19,17 +25,24 @@ document.getElementById("register").addEventListener("click", async () => {
 
     const credential = await navigator.credentials.create({ publicKey });
     console.log("Registered credential:", credential);
-    alert("Passkey registered!");
+
+    showOutput({
+      id: credential.id,
+      type: credential.type,
+      rawId: btoa(String.fromCharCode(...new Uint8Array(credential.rawId)))
+    });
+
+    alert("✅ Passkey registered!");
   } catch (err) {
     console.error(err);
-    alert("Registration failed: " + err);
+    alert("❌ Registration failed: " + err);
   }
 });
 
 document.getElementById("login").addEventListener("click", async () => {
   try {
     const publicKey = {
-      challenge: new Uint8Array(32), // normally from server
+      challenge: new Uint8Array(32), // Normally from server
       allowCredentials: [],
       userVerification: "preferred"
     };
@@ -37,19 +50,15 @@ document.getElementById("login").addEventListener("click", async () => {
     const assertion = await navigator.credentials.get({ publicKey });
     console.log("Authentication assertion:", assertion);
 
-     // Display some info on screen
-    document.body.insertAdjacentHTML("beforeend", `
-      <pre>${JSON.stringify({
-        id: assertion.id,
-        type: assertion.type,
-        clientDataJSON: new TextDecoder().decode(assertion.response.clientDataJSON),
-        authenticatorData: btoa(String.fromCharCode(...new Uint8Array(assertion.response.authenticatorData)))
-      }, null, 2)}</pre>
-    `);
-    
-    alert("Logged in with passkey!");
+    showOutput({
+      id: assertion.id,
+      type: assertion.type,
+      clientDataJSON: new TextDecoder().decode(assertion.response.clientDataJSON)
+    });
+
+    alert("✅ Logged in with passkey!");
   } catch (err) {
     console.error(err);
-    alert("Login failed: " + err);
+    alert("❌ Login failed: " + err);
   }
 });

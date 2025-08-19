@@ -4,17 +4,39 @@
   <meta charset="UTF-8" />
   <title>PWA Passkey Demo</title>
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#317EFB"/>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Passkey PWA">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#317EFB" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Passkey PWA" />
   <link rel="apple-touch-icon" href="/icons/icon-192.png">
 
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="/app.js"></script>
 </head>
-<body>
-  <h1>PWA Passkey Demo</h1>
-  <button id="register">Register Passkey</button>
-  <button id="login">Login with Passkey</button>
+<body class="bg-gray-50 h-screen flex items-center justify-center p-4">
+
+  <!-- Container -->
+  <div class="w-full max-w-sm bg-white shadow-xl rounded-2xl p-6 text-center">
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">🔑 Passkey PWA Demo</h1>
+    <p class="text-sm text-gray-600 mb-6">Secure login using Face ID / Touch ID</p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col gap-3">
+      <button id="register" 
+        class="w-full bg-blue-600 text-white py-3 rounded-xl shadow-md hover:bg-blue-700 active:scale-95 transition">
+        Register Passkey
+      </button>
+      <button id="login" 
+        class="w-full bg-green-600 text-white py-3 rounded-xl shadow-md hover:bg-green-700 active:scale-95 transition">
+        Login with Passkey
+      </button>
+    </div>
+
+    <!-- Output -->
+    <div id="output" class="mt-6 text-left text-xs bg-gray-100 rounded-lg p-3 overflow-x-auto hidden"></div>
+  </div>
+
 </body>
 </html>
