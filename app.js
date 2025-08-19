@@ -9,35 +9,35 @@ function showOutput(obj) {
   out.classList.remove("hidden");
 }
 
-document.getElementById("register").addEventListener("click", async () => {
-  try {
-    const publicKey = {
-      challenge: new Uint8Array(32), // Normally from server
-      rp: { name: "Passkey PWA Demo" },
-      user: {
-        id: new Uint8Array(16),
-        name: "user@example.com",
-        displayName: "Demo User"
-      },
-      pubKeyCredParams: [{ type: "public-key", alg: -7 }],
-      authenticatorSelection: { userVerification: "preferred" }
-    };
+// document.getElementById("register").addEventListener("click", async () => {
+//   try {
+//     const publicKey = {
+//       challenge: new Uint8Array(32), // Normally from server
+//       rp: { name: "Passkey PWA Demo" },
+//       user: {
+//         id: new Uint8Array(16),
+//         name: "user@example.com",
+//         displayName: "Demo User"
+//       },
+//       pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+//       authenticatorSelection: { userVerification: "preferred" }
+//     };
 
-    const credential = await navigator.credentials.create({ publicKey });
-    console.log("Registered credential:", credential);
+//     const credential = await navigator.credentials.create({ publicKey });
+//     console.log("Registered credential:", credential);
 
-    showOutput({
-      id: credential.id,
-      type: credential.type,
-      rawId: btoa(String.fromCharCode(...new Uint8Array(credential.rawId)))
-    });
+//     showOutput({
+//       id: credential.id,
+//       type: credential.type,
+//       rawId: btoa(String.fromCharCode(...new Uint8Array(credential.rawId)))
+//     });
 
-    alert("✅ Passkey registered!");
-  } catch (err) {
-    console.error(err);
-    alert("❌ Registration failed: " + err);
-  }
-});
+//     alert("✅ Passkey registered!");
+//   } catch (err) {
+//     console.error(err);
+//     alert("❌ Registration failed: " + err);
+//   }
+// });
 
 document.getElementById("login").addEventListener("click", async () => {
   try {
